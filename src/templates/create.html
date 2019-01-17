@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}
+{% endblock %}
+
+{% block stylesheet %}
+{% endblock %}
+{% block profile %}
+
+{% endblock %}
+{% block content %}
+ <!--For massege show start-->
+				  {% if messages %}
+					<div class="messages">
+						{% for message in messages %}
+						<div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</ul>
+						{% endfor %}
+					</div>
+					{% endif %}
+				  <!--For massege show End -->
+    <div class="container-fluid">
+        <div class="col-md-6 col-md-offset-3">
+        <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+            <button class="btn btn-success"> Publish </button>
+        </form>
+    </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+
+

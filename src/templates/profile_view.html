@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}
+{% endblock %}
+
+{% block stylesheet %}
+<style>
+.alert {
+    height: 50px;
+    margin-top: 200px;
+    color: blue;
+}</style>
+{% endblock %}
+{% block profile %}
+<div class="fh5co-bio">
+			<figure>
+				<img src="{{ user.profile_picture.url }}" alt="Free HTML5 Bootstrap Template" class="img-responsive">
+			</figure>
+			<h4 class="heading">About Me</h4>
+			<h4>{{user.name.get_full_name }}</h4>
+			<h5>{{user.name.email }}</h5>
+			<p>{{user.details}} </p>
+			<ul class="fh5co-social">
+				<li><a href="#"><i class="icon-twitter"></i></a></li>
+				<li><a href="#"><i class="icon-facebook"></i></a></li>
+				<li><a href="#"><i class="icon-instagram"></i></a></li>
+			</ul>
+		</div>
+{% endblock %}
+{% block content %}
+				  <!--For massege show start-->
+				  {% if messages %}
+					<div class="messages">
+						{% for message in messages %}
+						<div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</ul>
+						{% endfor %}
+					</div>
+					{% endif %}
+				  <!--For massege show End -->
+    <div class="container">
+        <a href="{% url 'create'%}" class="btn btn-primary pull pull-right">Create New Post</a>
+        <table class="table table-striped">
+            <thead>
+             <tr>
+                 <td><b>Title</b></td>
+                 <td><b>Post_ID</b></td>
+                 <td><b>Posted On</b></td>
+                 <td><b>Action</b></td>
+
+
+
+             </tr>
+            </thead>
+            <tbody>
+             {%for p in post%}
+                  <tr>
+                    <td> <a href="{%url 'single_post' id=p.id%}">{{p.title|truncatewords:15}}</a> </td>
+                      <td>{{p.id}}</td>
+                      <td>{{p.posted_on}}</td>
+                      <td><a href="{%url 'update' id=p.id%}"> Edit </a>  ||  <a href="{%url 'delete' id=p.id%}"> Delete </a></td>
+
+                </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+
+
